@@ -1,4 +1,4 @@
-#H1 This is my blog build with Python / Django
+# This is my blog build with Python / Django
 
 On this blog, you can post, modify and delete blogposts.
 There is a user validation for certain actions like deleting posts.
