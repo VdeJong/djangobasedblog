@@ -20,9 +20,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-    
+
+
 # comment model
-class Comment (models.Model):
+class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments')
     author = models.CharField(max_length=200)
     text = models.TextField()
