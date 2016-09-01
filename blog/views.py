@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, ContactForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.template import Context
+from django.core.mail import EmailMessage
+from django.template.loader import get_template
 
 # Create your views here.
 
@@ -114,3 +117,45 @@ def comment_remove(request, pk):
     post_pk = comment.post.pk
     comment.delete()
     return redirect('post_detail', pk=post_pk)
+
+
+def contact(request):
+    form_class = ContactForm
+
+    if request.method == 'POST':
+        data = dict(queryDict)
+
+        form = data
+
+        if form.is_valid:
+
+            contact_name = data['contact_name']
+            contact_email = data['contact_email']
+            form_content = data['content']
+
+            # put all form information in variables and stick it into a template
+            template = get_template('contact/contact_template.txt')
+            context = Context({
+                'contact_name': contact_name,
+                'contact_email': contact_email,
+                'form_content': form_content,
+            })
+            content = template.render(context)
+
+            # create email which sends the mail with information from the form
+            email = EmailMessage(
+                "New contact form submission",
+                content,
+                "Your website" + '',
+                ['v_dejong@icloud.com'],
+                headers = {'Reply-To': contact_email}
+            )
+
+            email.send()
+            return redirect('contact')
+
+    else:
+        form_class = ContactForm
+
+    return render(request, 'contact/contactform.html', {'form': form_class})
+
