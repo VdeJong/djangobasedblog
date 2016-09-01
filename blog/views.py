@@ -123,11 +123,12 @@ def contact(request):
     form_class = ContactForm
 
     if request.method == 'POST':
-        data = dict(queryDict)
 
-        form = data
+        data = request.POST
 
-        if form.is_valid:
+        form = form_class()
+
+        if 4+1==5:
 
             contact_name = data['contact_name']
             contact_email = data['contact_email']
