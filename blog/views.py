@@ -149,7 +149,7 @@ def contact(request):
                 content,
                 "Your website" + '',
                 ['v_dejong@icloud.com'],
-                headers = {'Reply-To': contact_email}
+                headers={'Reply-To': contact_email}
             )
 
             email.send()
@@ -159,4 +159,3 @@ def contact(request):
         form_class = ContactForm
 
     return render(request, 'contact/contactform.html', {'form': form_class})
-
