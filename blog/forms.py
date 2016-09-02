@@ -17,16 +17,11 @@ class CommentForm(forms.ModelForm):
 
 
 class ContactForm(forms.Form):
-    contact_name = forms.CharField(required=True)
-    contact_email = forms.EmailField(required=True)
+    contact_name = forms.CharField(required=True, label='Your Name:')
+    contact_email = forms.EmailField(required=True, label='Your Email:')
     content = forms.CharField(
         required=True,
-        widget=forms.Textarea
+        widget=forms.Textarea,
+        label='What do you want to say?'
     )
-
-    def __init__(self):
-        super(ContactForm, self).__init__()
-        self.fields['contact_name'].label = "Your name:"
-        self.fields['contact_email'].label = "Your email:"
-        self.fields['content'].label = "What do you want to say?"
 

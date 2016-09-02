@@ -126,9 +126,9 @@ def contact(request):
 
         data = request.POST
 
-        form = form_class()
+        form = form_class(data=request.POST)
 
-        if 4+1==5:
+        if form.is_valid:
 
             contact_name = data['contact_name']
             contact_email = data['contact_email']
