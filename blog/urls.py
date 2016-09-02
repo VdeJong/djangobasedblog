@@ -1,5 +1,6 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from . import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^$', views.post_list, name='post_list'),
@@ -13,5 +14,6 @@ urlpatterns = [
     url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
     url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
     url(r'^contact/$', views.contact, name='contact'),
+    url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
 
 ]

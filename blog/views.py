@@ -14,13 +14,13 @@ from django.template.loader import get_template
 def post_list(request):
     # check if post is published, if not, it will not be displayed.
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'index.html', {'posts': posts})
+    return render(request, 'content/post_list.html', {'posts': posts})
 
 
 def post_detail(request, pk):
     # check if post detail page exists by primary key
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
+    return render(request, 'content/post_detail.html', {'post': post})
 
 
 @login_required
@@ -44,7 +44,7 @@ def post_new(request):
     else:
         form = PostForm()
 
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'content/post_edit.html', {'form': form})
 
 
 @login_required
@@ -66,14 +66,14 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
 
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'content/post_edit.html', {'form': form})
 
 
 @login_required
 def post_draft_list(request):
     # filter posts by empty published date (unpublished posts)
     posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
-    return render(request, 'blog/post_draft_list.html', {'posts': posts})
+    return render(request, 'content/post_draft_list.html', {'posts': posts})
 
 
 @login_required
@@ -101,7 +101,7 @@ def add_comment_to_post(request, pk):
             return redirect('post_detail', pk=post.pk)
     else:
         form = CommentForm()
-    return render(request, 'blog/add_comment_to_post.html', {'form': form})
+    return render(request, 'content/add_comment_to_post.html', {'form': form})
 
 
 @login_required
