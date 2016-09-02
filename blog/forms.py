@@ -13,12 +13,10 @@ class CommentForm(forms.ModelForm):
                   'text')
 
 class ContactForm(forms.Form):
-    contact_name = forms.CharField(required=True)
-    contact_email = forms.EmailField(required=True)
+    contact_name = forms.CharField(required=True, label='Your Email:')
+    contact_email = forms.EmailField(required=True, label='Your Name:')
     content = forms.CharField(
         required=True,
-        widget=forms.Textarea)
-        # label='What do you want to say?'
-    # )
-
-    # label = 'Your Email:'label = 'Your Name:'
+        widget=forms.Textarea,
+        label='What do you want to say?'
+    )
