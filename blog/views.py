@@ -14,7 +14,7 @@ from django.template.loader import get_template
 def post_list(request):
     # check if post is published, if not, it will not be displayed.
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'blog/post_list.html', {'posts': posts})
+    return render(request, 'index.html', {'posts': posts})
 
 
 def post_detail(request, pk):
