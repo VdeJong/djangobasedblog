@@ -1,13 +1,13 @@
 from django.conf.urls import url, include
 from . import views
 from django.views.generic import TemplateView
-import django.contrib.auth.views
 from django.contrib.auth.views import (
     password_reset,
     password_reset_done,
     password_reset_confirm,
     password_reset_complete
 )
+import django.contrib.auth.views
 
 
 urlpatterns = [
@@ -33,8 +33,12 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^accounts/login/$', django.contrib.auth.views.login, name='login'),
     url(r'^accounts/logout/$', django.contrib.auth.views.logout, name='logout', kwargs={'next_page': '/'}),
-    url(r'^accounts/password/reset/$', password_reset, {'template_name':'registration/password_reset_form.html'}, name="password_reset"),
-    url(r'^accounts/password/reset/done/$', password_reset_done, {'template_name':'registration/password_reset_done.html'}, name="password_reset_done"),
-    url(r'^accounts/password/reset/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm, {'template_name':'registration/password_reset_confirm.html'}, name="password_reset_confirm"),
-    url(r'^accounts/password/done/$', password_reset_complete, {'template_name': 'registration/password_reset_complete.html'}, name="password_reset_complete")
+    url(r'^accounts/password/reset/$', password_reset, {'template_name': 'password/password_reset_form.html'},
+        name="password_reset"),
+    url(r'^accounts/password/reset/done/$', password_reset_done,
+        {'template_name': 'password/password_reset_done.html'}, name="password_reset_done"),
+    url(r'^accounts/password/reset/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm,
+        {'template_name': 'password/password_reset_confirm.html'}, name="password_reset_confirm"),
+    url(r'^accounts/password/done/$', password_reset_complete,
+        {'template_name': 'password/password_reset_complete.html'}, name="password_reset_complete")
 ]
