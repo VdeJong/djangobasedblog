@@ -24,8 +24,5 @@ class Migration(migrations.Migration):
                 ('approved_comment', models.BooleanField(default=False)),
                 ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='blog.Post')),
             ],
-            options={
-                'indexes': [],
-            },
         ),
     ]
